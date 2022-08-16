@@ -1,0 +1,70 @@
+{
+	"name": "ds_src_circuits",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_ls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"date": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "circuits.csv",
+				"folderPath": {
+					"value": "@dataset().date",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "circuitId",
+				"type": "String"
+			},
+			{
+				"name": "circuitRef",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "location",
+				"type": "String"
+			},
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "lat",
+				"type": "String"
+			},
+			{
+				"name": "lng",
+				"type": "String"
+			},
+			{
+				"name": "alt",
+				"type": "String"
+			},
+			{
+				"name": "url",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

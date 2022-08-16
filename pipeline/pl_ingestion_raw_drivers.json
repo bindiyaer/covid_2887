@@ -1,0 +1,238 @@
+{
+	"name": "pl_ingestion_raw_drivers",
+	"properties": {
+		"activities": [
+			{
+				"name": "Validation driver",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_src_drivers",
+						"type": "DatasetReference",
+						"parameters": {
+							"date": {
+								"value": "@pipeline().parameters.date",
+								"type": "Expression"
+							}
+						}
+					},
+					"timeout": "7.00:00:00",
+					"sleep": 10
+				}
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Validation driver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_src_drivers",
+						"type": "DatasetReference",
+						"parameters": {
+							"date": {
+								"value": "@pipeline().parameters.date",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Get Metadata1').output.exists,true)",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Copy drivers",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['driverId']"
+											},
+											"sink": {
+												"name": "driverId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['driverRef']"
+											},
+											"sink": {
+												"name": "driverRef",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['number']"
+											},
+											"sink": {
+												"name": "number",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['code']"
+											},
+											"sink": {
+												"name": "code",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['name']['forename']"
+											},
+											"sink": {
+												"name": "forename",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['name']['surname']"
+											},
+											"sink": {
+												"name": "surname",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['dob']"
+											},
+											"sink": {
+												"name": "dob",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['nationality']"
+											},
+											"sink": {
+												"name": "nationality",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['url']"
+											},
+											"sink": {
+												"name": "url",
+												"type": "String"
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_src_drivers",
+									"type": "DatasetReference",
+									"parameters": {
+										"date": {
+											"value": "@pipeline().parameters.date",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_target_drivers",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"date": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "formula1"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-08-09T14:57:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

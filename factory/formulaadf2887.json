@@ -1,0 +1,9 @@
+{
+	"name": "formulaadf2887",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b6dc008c-52fb-41ca-976d-60599549fec8",
+		"tenantId": "a9ea906a-12c6-455e-9987-a69a132d0d74"
+	}
+}
