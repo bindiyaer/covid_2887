@@ -13,16 +13,16 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_target_constructors",
+						"referenceName": "ds_target_results",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "results"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "select1"
+					"name": "sel"
 				}
 			],
 			"scriptLines": [
@@ -42,30 +42,38 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> circuits",
 				"source(output(",
+				"          resultId as string,",
+				"          raceId as string,",
+				"          driverId as string,",
 				"          constructorId as string,",
-				"          constructorRef as string,",
-				"          name as string,",
-				"          nationality as string,",
-				"          url as string",
+				"          number as string,",
+				"          grid as string,",
+				"          position as string,",
+				"          positionText as string,",
+				"          positionOrder as string,",
+				"          points as string,",
+				"          laps as string,",
+				"          time as string,",
+				"          milliseconds as string,",
+				"          fastestLap as string,",
+				"          rank as string,",
+				"          fastestLapTime as string,",
+				"          fastestLapSpeed as string,",
+				"          statusId as string",
 				"     ),",
 				"     allowSchemaDrift: false,",
 				"     validateSchema: true,",
 				"     limit: 100,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: '',",
-				"     format: 'query') ~> source1",
-				"circuits select(mapColumn(",
-				"          circuit_id = circuitId,",
-				"          circuit_ref = circuitRef,",
+				"     format: 'table') ~> results",
+				"results select(mapColumn(",
+				"          constructor_id = constructorId,",
+				"          constructor_ref = constructorRef,",
 				"          name,",
-				"          location,",
-				"          country,",
-				"          latitude = lat,",
-				"          longitude = lng,",
-				"          altitude = alt",
+				"          nationality",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> sel"
 			]
 		}
 	}
