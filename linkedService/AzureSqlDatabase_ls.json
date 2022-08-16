@@ -1,0 +1,12 @@
+{
+	"name": "AzureSqlDatabase_ls",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mysqlserver2887.database.windows.net;initial catalog=covid-db;user id=sqladmin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEU4RkY4MURDLUY5MUItNEQ5OS1BRTM3LUE2Q0IzRTZFRkVDRF80MzIzMjNjOC0yZmIxLTRkYzUtYjU5Yi02NWZiMmU5ZmJhNDAiDQp9"
+		}
+	}
+}

@@ -1,0 +1,90 @@
+{
+	"name": "ds_target_results",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "resultId",
+				"type": "varchar"
+			},
+			{
+				"name": "raceId",
+				"type": "varchar"
+			},
+			{
+				"name": "driverId",
+				"type": "varchar"
+			},
+			{
+				"name": "constructorId",
+				"type": "varchar"
+			},
+			{
+				"name": "number",
+				"type": "varchar"
+			},
+			{
+				"name": "grid",
+				"type": "varchar"
+			},
+			{
+				"name": "position",
+				"type": "varchar"
+			},
+			{
+				"name": "positionText",
+				"type": "varchar"
+			},
+			{
+				"name": "positionOrder",
+				"type": "varchar"
+			},
+			{
+				"name": "points",
+				"type": "varchar"
+			},
+			{
+				"name": "laps",
+				"type": "varchar"
+			},
+			{
+				"name": "time",
+				"type": "varchar"
+			},
+			{
+				"name": "milliseconds",
+				"type": "varchar"
+			},
+			{
+				"name": "fastestLap",
+				"type": "varchar"
+			},
+			{
+				"name": "rank",
+				"type": "varchar"
+			},
+			{
+				"name": "fastestLapTime",
+				"type": "varchar"
+			},
+			{
+				"name": "fastestLapSpeed",
+				"type": "varchar"
+			},
+			{
+				"name": "statusId",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "raw",
+			"table": "results"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

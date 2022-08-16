@@ -1,0 +1,50 @@
+{
+	"name": "ds_target_drivers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "driverId",
+				"type": "varchar"
+			},
+			{
+				"name": "driverRef",
+				"type": "varchar"
+			},
+			{
+				"name": "number",
+				"type": "varchar"
+			},
+			{
+				"name": "code",
+				"type": "varchar"
+			},
+			{
+				"name": "name",
+				"type": "varchar"
+			},
+			{
+				"name": "dob",
+				"type": "varchar"
+			},
+			{
+				"name": "nationality",
+				"type": "varchar"
+			},
+			{
+				"name": "url",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "raw",
+			"table": "drivers"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,65 @@
+{
+	"name": "ds_src_drivers",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_ls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"date": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "drivers.json",
+				"folderPath": {
+					"value": "@dataset().date",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"driverId": {
+					"type": "integer"
+				},
+				"driverRef": {
+					"type": "string"
+				},
+				"number": {
+					"type": "null"
+				},
+				"code": {
+					"type": "string"
+				},
+				"name": {
+					"type": "object",
+					"properties": {
+						"forename": {
+							"type": "string"
+						},
+						"surname": {
+							"type": "string"
+						}
+					}
+				},
+				"dob": {
+					"type": "string"
+				},
+				"nationality": {
+					"type": "string"
+				},
+				"url": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

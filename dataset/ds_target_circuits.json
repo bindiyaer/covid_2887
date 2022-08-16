@@ -1,0 +1,17 @@
+{
+	"name": "ds_target_circuits",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "raw",
+			"table": "circuits"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
